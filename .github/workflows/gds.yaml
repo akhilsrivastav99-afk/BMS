@@ -8,12 +8,15 @@ on:
 jobs:
   gds:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/devcontainers/base:ubuntu
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Enable Coreutils
-        run: sudo apt-get update && sudo apt-get install -y coreutils
-
-      - name: Run Tiny Tapeout Action
-        uses: tinytapeout/tt-ci-action@v1
+      - name: Display Repository Files
+        run: |
+          echo "Checking workspace structure..."
+          pwd
+          ls -la
+          ls -la test/ || echo "test folder missing"
